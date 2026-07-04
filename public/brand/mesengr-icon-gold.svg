@@ -1,0 +1,11 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mesengr">
+  <defs>
+    <linearGradient id="tileGold" x1="256" y1="0" x2="256" y2="512" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E8C766"/>
+      <stop offset="1" stop-color="#D4AF37"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="116" fill="url(#tileGold)"/>
+  <path d="M 133 350 L 133 162 L 228 252 L 323 162 L 323 350" stroke="#0B0F19" stroke-width="44" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <circle cx="372" cy="355" r="17" fill="#0B0F19"/>
+</svg>

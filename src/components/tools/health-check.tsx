@@ -11,6 +11,7 @@ type Report = {
   seo: number;
   accessibility: number;
   suggestions: string[];
+  source?: "lighthouse" | "basic";
 };
 
 function ScoreRing({ score, label, delay }: { score: number; label: string; delay: number }) {
@@ -191,7 +192,10 @@ export function HealthCheck() {
               <span className="font-medium text-foreground">
                 {report.url.replace(/^https?:\/\//, "").replace(/\/$/, "")}
               </span>{" "}
-              · mobile · Google Lighthouse
+              · mobile ·{" "}
+              {report.source === "basic"
+                ? "Mesengr quick scan"
+                : "Google Lighthouse"}
             </p>
             <div className="grid grid-cols-3 gap-4">
               <ScoreRing score={report.performance} label="Performance" delay={0.1} />
