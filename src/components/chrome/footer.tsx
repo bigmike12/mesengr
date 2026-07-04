@@ -5,6 +5,7 @@ import { useState } from "react";
 import { ArrowRight, Check } from "lucide-react";
 import { site } from "@/lib/site";
 import { Container } from "@/components/ui/section";
+import { LogoMark } from "@/components/ui/logo";
 
 const columns = [
   {
@@ -32,6 +33,7 @@ const columns = [
       { label: "Free Website Audit", href: "/audit" },
       { label: "Digital Assessment", href: "/assessment" },
       { label: "Resources", href: "/resources" },
+      // { label: "Brand Kit", href: "/brand" },
     ],
   },
   {
@@ -70,9 +72,12 @@ export function Footer() {
       <Container className="py-16 md:py-20">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_2fr]">
           <div>
-            <Link href="/" className="font-display text-2xl font-bold tracking-tight">
-              {site.name}
-              <span className="text-gold">.</span>
+            <Link href="/" aria-label={`${site.name} home`} className="inline-flex items-center gap-2.5">
+              <LogoMark className="size-9" />
+              <span className="font-display text-2xl font-bold tracking-tight">
+                {site.name}
+                <span className="text-gold">.</span>
+              </span>
             </Link>
             <p className="mt-4 max-w-sm leading-relaxed text-muted">
               {site.tagline} Your digital growth partner — strategy, design,

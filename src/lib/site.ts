@@ -33,6 +33,7 @@ export const allPages = [
   { label: "AI Solutions", href: "/ai-solutions" },
   { label: "Digital Assessment", href: "/assessment" },
   { label: "Careers", href: "/careers" },
+  { label: "Brand Kit", href: "/brand" },
   { label: "Privacy", href: "/privacy" },
   { label: "Terms", href: "/terms" },
 ];

@@ -8,6 +8,7 @@ import { Command, Menu, Moon, Sun, X } from "lucide-react";
 import { navLinks, site } from "@/lib/site";
 import { useTheme } from "@/components/theme-provider";
 import { ButtonLink } from "@/components/ui/button";
+import { Wordmark } from "@/components/ui/logo";
 import { cn } from "@/lib/utils";
 
 export function Navbar({ onOpenCommand }: { onOpenCommand: () => void }) {
@@ -44,12 +45,8 @@ export function Navbar({ onOpenCommand }: { onOpenCommand: () => void }) {
           )}
           aria-label="Main"
         >
-          <Link
-            href="/"
-            className="font-display text-lg font-bold tracking-tight"
-          >
-            {site.name}
-            <span className="text-gold">.</span>
+          <Link href="/" aria-label={`${site.name} home`} className="shrink-0">
+            <Wordmark />
           </Link>
 
           <div className="hidden items-center gap-1 lg:flex">
