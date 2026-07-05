@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, type ReactNode } from "react";
+import { LazyMotion, domAnimation } from "framer-motion";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/chrome/navbar";
 import { Footer } from "@/components/chrome/footer";
@@ -24,12 +25,16 @@ export function SiteShell({ children }: { children: ReactNode }) {
 
   return (
     <ThemeProvider>
-      <ScrollProgress />
-      <Navbar onOpenCommand={() => setCommandOpen(true)} />
-      <main id="main">{children}</main>
-      <Footer />
-      <FloatingContact />
-      <CommandMenu open={commandOpen} onClose={() => setCommandOpen(false)} />
+      {/* LazyMotion + the m.* API loads a ~6kb animation core instead of the
+          full framer-motion runtime on every page */}
+      <LazyMotion features={domAnimation} strict>
+        <ScrollProgress />
+        <Navbar onOpenCommand={() => setCommandOpen(true)} />
+        <main id="main">{children}</main>
+        <Footer />
+        <FloatingContact />
+        <CommandMenu open={commandOpen} onClose={() => setCommandOpen(false)} />
+      </LazyMotion>
     </ThemeProvider>
   );
 }

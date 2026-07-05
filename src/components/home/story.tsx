@@ -1,6 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
 import {
   Gauge,
   MailX,
@@ -71,14 +68,12 @@ export function Story() {
         <Stagger className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" gap={0.05}>
           {problems.map((p) => (
             <StaggerItem key={p.title}>
-              <motion.div
-                whileHover={{ y: -4 }}
-                className="h-full rounded-3xl border border-border bg-card p-7 shadow-soft transition-shadow hover:shadow-lift"
+              <div className="hover-lift h-full rounded-3xl border border-border bg-card p-7 shadow-soft hover:shadow-lift"
               >
                 <p.icon className="size-6 text-red-400" strokeWidth={1.75} aria-hidden />
                 <h3 className="mt-4 font-display text-lg font-semibold">{p.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted">{p.text}</p>
-              </motion.div>
+              </div>
             </StaggerItem>
           ))}
 

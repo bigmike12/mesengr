@@ -60,7 +60,7 @@ export default function AboutPage() {
                   <Counter
                     to={stat.to}
                     suffix={stat.suffix}
-                    className="font-display text-3xl font-bold text-gold md:text-4xl"
+                    className="font-display text-3xl font-bold text-gold-deep md:text-4xl"
                   />
                   <p className="mt-2 text-sm text-muted">{stat.label}</p>
                 </div>
@@ -108,7 +108,7 @@ export default function AboutPage() {
             {values.map((v, i) => (
               <StaggerItem key={v.title}>
                 <div className="h-full rounded-3xl border border-border bg-card p-8 shadow-soft">
-                  <span className="font-display text-sm font-bold text-gold">
+                  <span className="font-display text-sm font-bold text-gold-deep">
                     0{i + 1}
                   </span>
                   <h3 className="mt-3 font-display text-xl font-semibold">{v.title}</h3>

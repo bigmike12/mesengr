@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { Command, Menu, Moon, Sun, X } from "lucide-react";
 import { navLinks, site } from "@/lib/site";
 import { useTheme } from "@/components/theme-provider";
@@ -108,7 +108,7 @@ export function Navbar({ onOpenCommand }: { onOpenCommand: () => void }) {
 
         <AnimatePresence>
           {mobileOpen && (
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
@@ -129,7 +129,7 @@ export function Navbar({ onOpenCommand }: { onOpenCommand: () => void }) {
                   Book Free Strategy Call
                 </ButtonLink>
               </div>
-            </motion.div>
+            </m.div>
           )}
         </AnimatePresence>
       </div>

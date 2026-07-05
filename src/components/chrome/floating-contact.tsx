@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { CalendarPlus, Mail, MessageCircle, Phone, X } from "lucide-react";
 import { site } from "@/lib/site";
 
@@ -20,7 +20,7 @@ export function FloatingContact() {
       <AnimatePresence>
         {open &&
           actions.map((action, i) => (
-            <motion.div
+            <m.div
               key={action.label}
               initial={{ opacity: 0, y: 12, scale: 0.9 }}
               animate={{
@@ -38,7 +38,7 @@ export function FloatingContact() {
                   rel="noreferrer"
                   className="glass flex items-center gap-2.5 rounded-full border border-border px-4 py-2.5 text-sm shadow-soft transition-colors hover:border-gold"
                 >
-                  <action.icon className="size-4 text-gold" aria-hidden />
+                  <action.icon className="size-4 text-gold-deep" aria-hidden />
                   {action.label}
                 </a>
               ) : (
@@ -47,15 +47,15 @@ export function FloatingContact() {
                   onClick={() => setOpen(false)}
                   className="glass flex items-center gap-2.5 rounded-full border border-border px-4 py-2.5 text-sm shadow-soft transition-colors hover:border-gold"
                 >
-                  <action.icon className="size-4 text-gold" aria-hidden />
+                  <action.icon className="size-4 text-gold-deep" aria-hidden />
                   {action.label}
                 </Link>
               )}
-            </motion.div>
+            </m.div>
           ))}
       </AnimatePresence>
 
-      <motion.button
+      <m.button
         onClick={() => setOpen((v) => !v)}
         whileHover={{ scale: 1.06 }}
         whileTap={{ scale: 0.94 }}
@@ -69,7 +69,7 @@ export function FloatingContact() {
         ) : (
           <MessageCircle className="size-5" aria-hidden />
         )}
-      </motion.button>
+      </m.button>
     </div>
   );
 }

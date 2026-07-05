@@ -52,7 +52,7 @@ export function Faq({ limit }: { limit?: number }) {
           ) : (
             <p className="rounded-3xl border border-border bg-card p-10 text-center text-muted">
               No matches — but we&apos;d love to answer it.{" "}
-              <a href="/contact" className="text-gold underline-offset-4 hover:underline">
+              <a href="/contact" className="text-gold-deep underline-offset-4 hover:underline">
                 Ask us directly
               </a>
               .

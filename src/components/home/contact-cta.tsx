@@ -25,7 +25,7 @@ export function ContactCta() {
               <h2 className="mx-auto max-w-3xl font-display text-4xl font-semibold tracking-tight text-balance md:text-6xl">
                 More than websites.
                 <br />
-                <span className="text-gradient-gold">We build your digital business.</span>
+                <span className="text-gradient-gold-bright">We build your digital business.</span>
               </h2>
               <p className="mx-auto mt-6 max-w-xl text-white/70">
                 One conversation. A clear picture of where your business stands

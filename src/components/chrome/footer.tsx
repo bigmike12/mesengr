@@ -76,7 +76,7 @@ export function Footer() {
               <LogoMark className="size-9" />
               <span className="font-display text-2xl font-bold tracking-tight">
                 {site.name}
-                <span className="text-gold">.</span>
+                <span className="text-gold-deep">.</span>
               </span>
             </Link>
             <p className="mt-4 max-w-sm leading-relaxed text-muted">
@@ -96,7 +96,7 @@ export function Footer() {
               </p>
               {subscribed ? (
                 <p className="flex items-center gap-2 rounded-2xl border border-gold/40 bg-gold-soft px-4 py-3 text-sm">
-                  <Check className="size-4 text-gold" aria-hidden />
+                  <Check className="size-4 text-gold-deep" aria-hidden />
                   You&apos;re in. Talk soon.
                 </p>
               ) : (

@@ -1,6 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { Play, Quote } from "lucide-react";
 import { testimonials } from "@/lib/site";
 import { Container, Eyebrow, Heading, Section } from "@/components/ui/section";
@@ -29,18 +26,16 @@ export function Testimonials() {
         <Stagger className="mt-14 grid gap-5 md:grid-cols-2" gap={0.08}>
           {testimonials.map((t, i) => (
             <StaggerItem key={t.name}>
-              <motion.figure
-                whileHover={{ y: -4 }}
-                className="flex h-full flex-col rounded-3xl border border-border bg-card p-8 shadow-soft transition-shadow hover:shadow-lift"
+              <figure className="hover-lift flex h-full flex-col rounded-3xl border border-border bg-card p-8 shadow-soft hover:shadow-lift"
               >
-                <Quote className="size-6 text-gold" aria-hidden />
+                <Quote className="size-6 text-gold-deep" aria-hidden />
                 <blockquote className="mt-4 flex-1 text-lg leading-relaxed">
                   “{t.quote}”
                 </blockquote>
                 <figcaption className="mt-6 flex items-center gap-4">
                   <span
                     aria-hidden
-                    className="flex size-11 items-center justify-center rounded-full bg-gradient-to-br from-gold/30 to-gold/10 font-display text-sm font-bold text-gold"
+                    className="flex size-11 items-center justify-center rounded-full bg-gradient-to-br from-gold/30 to-gold/10 font-display text-sm font-bold text-gold-deep"
                   >
                     {t.name
                       .split(" ")
@@ -62,7 +57,7 @@ export function Testimonials() {
                     </button>
                   )}
                 </figcaption>
-              </motion.figure>
+              </figure>
             </StaggerItem>
           ))}
         </Stagger>

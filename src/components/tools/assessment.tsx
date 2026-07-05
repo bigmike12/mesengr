@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import {
   ArrowLeft,
   ArrowRight,
@@ -290,7 +290,7 @@ export function Assessment() {
 
   if (done) {
     return (
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -331,23 +331,23 @@ export function Assessment() {
           {/* Recommendations */}
           <div className="mt-10">
             <h3 className="flex items-center gap-2 font-display text-lg font-semibold">
-              <TrendingUp className="size-5 text-gold" aria-hidden />
+              <TrendingUp className="size-5 text-gold-deep" aria-hidden />
               Your top {recommendations.length} recommended improvements
             </h3>
             <ol className="mt-5 space-y-4">
               {recommendations.map((rec, i) => (
-                <motion.li
+                <m.li
                   key={rec}
                   initial={{ opacity: 0, x: -16 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.2 + i * 0.12 }}
                   className="flex items-start gap-4"
                 >
-                  <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-gold-soft font-display text-xs font-bold text-gold">
+                  <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-gold-soft font-display text-xs font-bold text-gold-deep">
                     {i + 1}
                   </span>
                   <span className="leading-relaxed">{rec}</span>
-                </motion.li>
+                </m.li>
               ))}
             </ol>
           </div>
@@ -359,7 +359,7 @@ export function Assessment() {
               {suggestedServices.map((s) => (
                 <span
                   key={s}
-                  className="rounded-full border border-gold/40 bg-gold-soft px-4 py-2 text-sm font-medium text-gold"
+                  className="rounded-full border border-gold/40 bg-gold-soft px-4 py-2 text-sm font-medium text-gold-deep"
                 >
                   {s}
                 </span>
@@ -385,7 +385,7 @@ export function Assessment() {
                     <span className="size-2 rounded-full bg-gold" aria-hidden />
                   </span>
                   <div>
-                    <p className="text-xs font-semibold uppercase tracking-wider text-gold">
+                    <p className="text-xs font-semibold uppercase tracking-wider text-gold-deep">
                       {r.phase}
                     </p>
                     <p className="font-medium">{r.label}</p>
@@ -398,7 +398,7 @@ export function Assessment() {
 
           <div className="mt-10 rounded-2xl bg-surface p-6 text-center">
             <p className="flex items-center justify-center gap-2 text-sm text-muted">
-              <Mail className="size-4 text-gold" aria-hidden />
+              <Mail className="size-4 text-gold-deep" aria-hidden />
               {emailFailed ? (
                 <>Couldn&apos;t email the report just now — save this page, or book a call and we&apos;ll walk you through it.</>
               ) : (
@@ -418,7 +418,7 @@ export function Assessment() {
             </div>
           </div>
         </div>
-      </motion.div>
+      </m.div>
     );
   }
 
@@ -433,7 +433,7 @@ export function Assessment() {
           <span>{Math.round(progress)}%</span>
         </div>
         <div className="h-1.5 overflow-hidden rounded-full bg-border">
-          <motion.div
+          <m.div
             className="h-full rounded-full bg-gradient-to-r from-gold to-[#f0d47a]"
             animate={{ width: `${progress}%` }}
             transition={{ duration: 0.5, ease: [0.21, 0.47, 0.32, 0.98] }}
@@ -443,7 +443,7 @@ export function Assessment() {
 
       <AnimatePresence mode="wait">
         {!atEmail ? (
-          <motion.div
+          <m.div
             key={question.id}
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
@@ -505,9 +505,9 @@ export function Assessment() {
                 </Button>
               )}
             </div>
-          </motion.div>
+          </m.div>
         ) : (
-          <motion.form
+          <m.form
             key="email"
             onSubmit={submit}
             initial={{ opacity: 0, x: 40 }}
@@ -517,7 +517,7 @@ export function Assessment() {
             className="rounded-3xl border border-border bg-card p-8 text-center shadow-soft md:p-10"
           >
             <span className="mx-auto flex size-14 items-center justify-center rounded-full bg-gold-soft">
-              <Sparkles className="size-6 text-gold" aria-hidden />
+              <Sparkles className="size-6 text-gold-deep" aria-hidden />
             </span>
             <h2 className="mt-5 font-display text-2xl font-semibold md:text-3xl">
               Your report is ready.
@@ -552,7 +552,7 @@ export function Assessment() {
               <ArrowLeft className="size-4" aria-hidden />
               Back
             </button>
-          </motion.form>
+          </m.form>
         )}
       </AnimatePresence>
     </div>

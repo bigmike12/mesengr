@@ -57,7 +57,7 @@ export default function AiSolutionsPage() {
             {benefits.map((b) => (
               <StaggerItem key={b.title}>
                 <div className="h-full rounded-3xl border border-border bg-card p-7 shadow-soft">
-                  <p className="font-display text-3xl font-bold text-gold">{b.stat}</p>
+                  <p className="font-display text-3xl font-bold text-gold-deep">{b.stat}</p>
                   <h3 className="mt-3 font-display text-base font-semibold">{b.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-muted">{b.text}</p>
                 </div>

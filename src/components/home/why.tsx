@@ -1,11 +1,9 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { whyCards } from "@/lib/site";
 import { Container, Eyebrow, Heading, Lead, Section } from "@/components/ui/section";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/reveal";
 import { Icon } from "@/components/ui/icon";
 
+// Server component — reveals and hover lifts are pure CSS (see globals.css)
 export function Why() {
   return (
     <Section id="why">
@@ -26,16 +24,12 @@ export function Why() {
         <Stagger className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {whyCards.map((card, i) => (
             <StaggerItem key={card.title} className={i === 6 ? "sm:col-span-2 lg:col-span-2" : ""}>
-              <motion.div
-                whileHover={{ y: -6 }}
-                transition={{ duration: 0.3 }}
-                className="group relative h-full overflow-hidden rounded-3xl border border-border bg-card p-7 shadow-soft transition-shadow duration-300 hover:shadow-lift"
-              >
+              <div className="hover-lift group relative h-full overflow-hidden rounded-3xl border border-border bg-card p-7 shadow-soft hover:shadow-lift">
                 <div
                   aria-hidden
                   className="absolute -right-10 -top-10 size-32 rounded-full bg-gold/0 blur-3xl transition-all duration-500 group-hover:bg-gold/15"
                 />
-                <div className="mb-5 inline-flex rounded-2xl border border-border bg-surface p-3 text-gold transition-transform duration-300 group-hover:scale-110">
+                <div className="mb-5 inline-flex rounded-2xl border border-border bg-surface p-3 text-gold-deep transition-transform duration-300 group-hover:scale-110">
                   <Icon name={card.icon} className="size-6" />
                 </div>
                 <h3 className="font-display text-lg font-semibold">{card.title}</h3>
@@ -46,7 +40,7 @@ export function Why() {
                 <p className="mt-2.5 text-sm leading-relaxed text-muted lg:hidden">
                   {card.text}
                 </p>
-              </motion.div>
+              </div>
             </StaggerItem>
           ))}
         </Stagger>

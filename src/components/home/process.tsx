@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import { m, useScroll, useSpring, useTransform } from "framer-motion";
 import { processSteps } from "@/lib/site";
 import { Container, Eyebrow, Heading, Lead, Section } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/reveal";
@@ -33,7 +33,7 @@ export function Process() {
             aria-hidden
             className="absolute bottom-6 left-[19px] top-6 w-px bg-border md:left-1/2"
           />
-          <motion.div
+          <m.div
             aria-hidden
             style={{ scaleY: lineScale }}
             className="absolute bottom-6 left-[19px] top-6 w-px origin-top bg-gradient-to-b from-gold to-gold/40 md:left-1/2"
@@ -48,15 +48,15 @@ export function Process() {
                     : "md:ml-auto md:flex-row-reverse md:pl-14 md:text-left"
                 }`}
               >
-                <motion.span
+                <m.span
                   initial={{ scale: 0.6, opacity: 0.4 }}
                   whileInView={{ scale: 1, opacity: 1 }}
                   viewport={{ once: true, margin: "-100px" }}
                   transition={{ duration: 0.4 }}
-                  className={`z-10 flex size-10 shrink-0 items-center justify-center rounded-full border border-gold/40 bg-card font-display text-sm font-semibold text-gold shadow-soft md:absolute md:left-1/2 md:-translate-x-1/2`}
+                  className={`z-10 flex size-10 shrink-0 items-center justify-center rounded-full border border-gold/40 bg-card font-display text-sm font-semibold text-gold-deep shadow-soft md:absolute md:left-1/2 md:-translate-x-1/2`}
                 >
                   {i + 1}
-                </motion.span>
+                </m.span>
                 <Reveal
                   delay={0.05}
                   className={i % 2 === 0 ? "md:mr-0 md:w-full" : "md:ml-0 md:w-full"}

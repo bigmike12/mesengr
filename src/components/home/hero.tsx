@@ -1,7 +1,13 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import {
+  AnimatePresence,
+  m,
+  useMotionValue,
+  useSpring,
+  useTransform,
+} from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/section";
@@ -48,15 +54,15 @@ function BrowserMockup() {
           yourbusiness.com
         </div>
         <AnimatePresence mode="wait">
-          <motion.span
+          <m.span
             key={stage}
             initial={{ opacity: 0, y: 4 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -4 }}
-            className="rounded-full bg-gold-soft px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-gold"
+            className="rounded-full bg-gold-soft px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-gold-deep"
           >
             {stageLabel[stage]}
-          </motion.span>
+          </m.span>
         </AnimatePresence>
       </div>
 
@@ -87,15 +93,14 @@ function BrowserMockup() {
           <div className={block(`h-9 w-28 ${isLive ? "bg-surface" : ""}`)} />
         </div>
 
-        {/* Card grid */}
+        {/* Card grid — animated via CSS only while live (GPU transform) */}
         <div className="grid grid-cols-3 gap-3 pt-2">
           {[0, 1, 2].map((i) => (
-            <motion.div
+            <div
               key={i}
-              animate={isLive ? { y: [0, -3, 0] } : { y: 0 }}
-              transition={{ duration: 3, repeat: Infinity, delay: i * 0.4 }}
+              style={isLive ? { animationDelay: `${i * 0.4}s` } : undefined}
               className={block(
-                `h-20 ${isLive ? "bg-gradient-to-br from-surface to-gold-soft" : ""}`,
+                `h-20 ${isLive ? "animate-float [animation-duration:3s] bg-gradient-to-br from-surface to-gold-soft" : ""}`,
               )}
             />
           ))}
@@ -105,7 +110,7 @@ function BrowserMockup() {
       {/* Live badge */}
       <AnimatePresence>
         {isLive && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
@@ -113,7 +118,7 @@ function BrowserMockup() {
           >
             <span className="size-1.5 animate-pulse rounded-full bg-green-400" aria-hidden />
             Live · 100/100 Lighthouse
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </div>
@@ -143,7 +148,7 @@ export function Hero() {
       className="relative overflow-hidden pb-24 pt-40 md:pb-32 md:pt-48"
     >
       {/* Moving grid + glow background */}
-      <motion.div
+      <m.div
         aria-hidden
         style={{ x: gridX, y: gridY }}
         className="bg-grid absolute -inset-14 opacity-70 [mask-image:radial-gradient(ellipse_75%_65%_at_50%_35%,black,transparent)]"
@@ -155,44 +160,26 @@ export function Hero() {
 
       <Container className="relative">
         <div className="grid items-center gap-16 lg:grid-cols-[1.1fr_1fr]">
+          {/* Text column: pure CSS entrance — paints before hydration (LCP) */}
           <div>
-            <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-xs font-medium text-muted shadow-soft"
-            >
-              <Sparkles className="size-3.5 text-gold" aria-hidden />
+            <p className="anim-fade-up mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-xs font-medium text-muted shadow-soft">
+              <Sparkles className="size-3.5 text-gold-deep" aria-hidden />
               Digital Growth Partner for SMEs
-            </motion.p>
+            </p>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.08 }}
-              className="font-display text-5xl font-semibold leading-[1.05] tracking-tight text-balance md:text-7xl"
-            >
+            {/* Transform-only animation: the heading is opaque at first paint */}
+            <h1 className="anim-rise font-display text-5xl font-semibold leading-[1.05] tracking-tight text-balance [animation-delay:0.08s] md:text-7xl">
               Your business deserves more than{" "}
               <span className="text-gradient-gold">just a website</span>.
-            </motion.h1>
+            </h1>
 
-            <motion.p
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.18 }}
-              className="mt-7 max-w-xl text-lg leading-relaxed text-muted"
-            >
+            <p className="anim-fade-up mt-7 max-w-xl text-lg leading-relaxed text-muted [animation-delay:0.18s]">
               Mesengr helps SMEs launch, automate and grow their digital
               presence through strategy, design, development and continuous
               support.
-            </motion.p>
+            </p>
 
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.28 }}
-              className="mt-10 flex flex-wrap items-center gap-4"
-            >
+            <div className="anim-fade-up mt-10 flex flex-wrap items-center gap-4 [animation-delay:0.28s]">
               <ButtonLink href="/book" variant="gold" size="lg">
                 Book Free Strategy Call
                 <ArrowRight className="size-4" aria-hidden />
@@ -200,32 +187,25 @@ export function Hero() {
               <ButtonLink href="/case-studies" variant="outline" size="lg">
                 View Our Work
               </ButtonLink>
-            </motion.div>
+            </div>
 
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-              className="mt-8 text-sm text-muted"
-            >
+            <p className="anim-fade-up mt-8 text-sm text-muted [animation-delay:0.45s]">
               No pressure, no jargon — just an honest conversation about your
               growth.
-            </motion.p>
+            </p>
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.25 }}
+          <m.div
+            initial={false}
             style={{ x: mockX, y: mockY }}
-            className="relative"
+            className="anim-fade-up relative [animation-delay:0.25s]"
           >
             <div
               aria-hidden
               className="absolute -inset-6 -z-10 rounded-[2.5rem] bg-gradient-to-br from-gold/20 via-transparent to-transparent blur-2xl"
             />
             <BrowserMockup />
-          </motion.div>
+          </m.div>
         </div>
       </Container>
     </div>

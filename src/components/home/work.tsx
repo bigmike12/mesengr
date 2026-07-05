@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { caseStudies } from "@/lib/site";
 import { Container, Eyebrow, Heading, Lead, Section } from "@/components/ui/section";
@@ -105,7 +105,7 @@ export function Work() {
 
         <div className="relative mt-12 overflow-hidden">
           <AnimatePresence mode="wait" custom={dir}>
-            <motion.div
+            <m.div
               key={study.slug}
               custom={dir}
               initial={{ opacity: 0, x: dir * 60 }}
@@ -161,7 +161,7 @@ export function Work() {
                       key={r.label}
                       className="rounded-2xl border border-border bg-surface p-4 text-center"
                     >
-                      <p className="font-display text-lg font-bold text-gold md:text-xl">
+                      <p className="font-display text-lg font-bold text-gold-deep md:text-xl">
                         {r.value}
                       </p>
                       <p className="mt-1 text-[11px] leading-tight text-muted">{r.label}</p>
@@ -177,7 +177,7 @@ export function Work() {
                   Read the full case study
                 </ButtonLink>
               </div>
-            </motion.div>
+            </m.div>
           </AnimatePresence>
 
           <div className="mt-6 flex justify-center gap-2">
@@ -189,10 +189,16 @@ export function Work() {
                   setIndex(i);
                 }}
                 aria-label={`Go to ${s.client}`}
-                className={`h-1.5 rounded-full transition-all duration-300 ${
-                  i === index ? "w-8 bg-gold" : "w-3 bg-border-strong"
-                }`}
-              />
+                aria-current={i === index ? "true" : undefined}
+                className="flex min-h-6 items-center px-1.5 py-2"
+              >
+                <span
+                  aria-hidden
+                  className={`h-1.5 rounded-full transition-all duration-300 ${
+                    i === index ? "w-8 bg-gold" : "w-3 bg-border-strong"
+                  }`}
+                />
+              </button>
             ))}
           </div>
         </div>
@@ -211,7 +217,7 @@ export function Work() {
                   to={stat.to}
                   suffix={stat.suffix}
                   decimals={stat.decimals ?? 0}
-                  className="font-display text-3xl font-bold text-gold md:text-4xl"
+                  className="font-display text-3xl font-bold text-gold-deep md:text-4xl"
                 />
                 <p className="mt-2 text-sm text-muted">{stat.label}</p>
               </div>
