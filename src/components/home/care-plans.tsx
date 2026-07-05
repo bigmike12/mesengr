@@ -1,6 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { Check, ShieldCheck } from "lucide-react";
 import { carePlans } from "@/lib/site";
 import { Container, Eyebrow, Heading, Lead, Section } from "@/components/ui/section";
@@ -23,15 +20,14 @@ export function CarePlansSection() {
         <Stagger className="mt-14 grid gap-5 md:grid-cols-3" gap={0.08}>
           {carePlans.map((plan) => (
             <StaggerItem key={plan.name}>
-              <motion.div
-                whileHover={{ y: -5 }}
-                className={`flex h-full flex-col rounded-3xl border bg-card p-7 shadow-soft transition-shadow hover:shadow-lift ${
+              <div
+                className={`hover-lift flex h-full flex-col rounded-3xl border bg-card p-7 shadow-soft hover:shadow-lift ${
                   plan.highlight ? "border-gold/50" : "border-border"
                 }`}
               >
                 <div className="flex items-center gap-3">
                   <span className="rounded-2xl bg-gold-soft p-2.5">
-                    <ShieldCheck className="size-5 text-gold" aria-hidden />
+                    <ShieldCheck className="size-5 text-gold-deep" aria-hidden />
                   </span>
                   <h3 className="font-display text-lg font-semibold">{plan.name}</h3>
                 </div>
@@ -39,7 +35,7 @@ export function CarePlansSection() {
                 <ul className="mt-6 flex-1 space-y-3">
                   {plan.features.map((f) => (
                     <li key={f} className="flex items-center gap-2.5 text-sm">
-                      <Check className="size-3.5 shrink-0 text-gold" aria-hidden />
+                      <Check className="size-3.5 shrink-0 text-gold-deep" aria-hidden />
                       {f}
                     </li>
                   ))}
@@ -54,7 +50,7 @@ export function CarePlansSection() {
                     Plan details
                   </ButtonLink>
                 </div>
-              </motion.div>
+              </div>
             </StaggerItem>
           ))}
         </Stagger>

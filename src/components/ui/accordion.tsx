@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { Plus } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -28,17 +28,17 @@ export function Accordion({
               <span className="font-display text-base font-medium md:text-lg">
                 {item.q}
               </span>
-              <motion.span
+              <m.span
                 animate={{ rotate: isOpen ? 45 : 0 }}
                 transition={{ duration: 0.3 }}
                 className="shrink-0 rounded-full border border-border p-1.5 text-muted"
               >
                 <Plus className="size-4" aria-hidden />
-              </motion.span>
+              </m.span>
             </button>
             <AnimatePresence initial={false}>
               {isOpen && (
-                <motion.div
+                <m.div
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: "auto", opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
@@ -48,7 +48,7 @@ export function Accordion({
                   <p className="px-6 pb-6 leading-relaxed text-muted md:px-8">
                     {item.a}
                   </p>
-                </motion.div>
+                </m.div>
               )}
             </AnimatePresence>
           </div>

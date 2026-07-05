@@ -249,7 +249,7 @@ export default function BrandPage() {
                     "Use the light lockup on dark photos, the dark lockup on light ones.",
                   ].map((t) => (
                     <li key={t} className="flex gap-2.5">
-                      <Check className="mt-0.5 size-4 shrink-0 text-gold" aria-hidden />
+                      <Check className="mt-0.5 size-4 shrink-0 text-gold-deep" aria-hidden />
                       {t}
                     </li>
                   ))}

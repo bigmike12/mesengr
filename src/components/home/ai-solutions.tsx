@@ -1,6 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { aiSolutions } from "@/lib/site";
 import { Container, Eyebrow, Heading, Lead, Section } from "@/components/ui/section";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/reveal";
@@ -32,16 +29,14 @@ export function AiSolutionsSection() {
         <Stagger className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" gap={0.05}>
           {aiSolutions.map((sol) => (
             <StaggerItem key={sol.title}>
-              <motion.div
-                whileHover={{ y: -5 }}
-                className="group h-full rounded-3xl border border-border bg-card p-6 shadow-soft transition-all hover:border-gold/40 hover:shadow-lift"
+              <div className="hover-lift group h-full rounded-3xl border border-border bg-card p-6 shadow-soft transition-all hover:border-gold/40 hover:shadow-lift"
               >
-                <div className="inline-flex rounded-2xl border border-border bg-surface p-2.5 text-gold transition-transform duration-300 group-hover:scale-110">
+                <div className="inline-flex rounded-2xl border border-border bg-surface p-2.5 text-gold-deep transition-transform duration-300 group-hover:scale-110">
                   <Icon name={sol.icon} className="size-5" />
                 </div>
                 <h3 className="mt-4 font-display text-base font-semibold">{sol.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted">{sol.text}</p>
-              </motion.div>
+              </div>
             </StaggerItem>
           ))}
         </Stagger>

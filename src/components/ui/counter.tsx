@@ -1,8 +1,9 @@
 "use client";
 
-import { animate, useInView } from "framer-motion";
 import { useEffect, useRef } from "react";
 
+// rAF-based count-up (framer-motion removed — this was its only use in the
+// stats grids). Runs once when scrolled into view, respects reduced motion.
 export function Counter({
   to,
   prefix = "",
@@ -19,23 +20,45 @@ export function Counter({
   className?: string;
 }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
 
   useEffect(() => {
-    if (!inView || !ref.current) return;
     const node = ref.current;
-    const controls = animate(0, to, {
-      duration,
-      ease: [0.21, 0.47, 0.32, 0.98],
-      onUpdate: (v) => {
-        node.textContent = `${prefix}${v.toLocaleString(undefined, {
-          minimumFractionDigits: decimals,
-          maximumFractionDigits: decimals,
-        })}${suffix}`;
+    if (!node) return;
+
+    const fmt = (v: number) =>
+      `${prefix}${v.toLocaleString(undefined, {
+        minimumFractionDigits: decimals,
+        maximumFractionDigits: decimals,
+      })}${suffix}`;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      node.textContent = fmt(to);
+      return;
+    }
+
+    let raf = 0;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        io.disconnect();
+        const start = performance.now();
+        const ms = duration * 1000;
+        const ease = (t: number) => 1 - Math.pow(1 - t, 3);
+        const tick = (now: number) => {
+          const t = Math.min((now - start) / ms, 1);
+          node.textContent = fmt(to * ease(t));
+          if (t < 1) raf = requestAnimationFrame(tick);
+        };
+        raf = requestAnimationFrame(tick);
       },
-    });
-    return () => controls.stop();
-  }, [inView, to, prefix, suffix, decimals, duration]);
+      { rootMargin: "-60px 0px" },
+    );
+    io.observe(node);
+    return () => {
+      io.disconnect();
+      cancelAnimationFrame(raf);
+    };
+  }, [to, prefix, suffix, decimals, duration]);
 
   return (
     <span ref={ref} className={className}>

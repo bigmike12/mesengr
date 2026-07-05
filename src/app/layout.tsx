@@ -45,6 +45,7 @@ export const metadata: Metadata = {
     description: site.description,
   },
   robots: { index: true, follow: true },
+  alternates: { canonical: "./" },
 };
 
 export const viewport: Viewport = {
@@ -81,9 +82,11 @@ export default function RootLayout({
     >
       <head>
         <script
-          // Apply stored theme before paint to avoid a flash of the wrong theme
+          // Before paint: apply stored theme (no flash) and mark JS available
+          // (scroll-reveal hidden states only apply under html.js, so content
+          // is never invisible for crawlers or no-JS visitors)
           dangerouslySetInnerHTML={{
-            __html: `try{var t=localStorage.getItem("mesengr-theme");if(t==="dark"||(!t&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.classList.add("dark")}catch(e){}`,
+            __html: `document.documentElement.classList.add("js");try{var t=localStorage.getItem("mesengr-theme");if(t==="dark"||(!t&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.classList.add("dark")}catch(e){}`,
           }}
         />
         <script

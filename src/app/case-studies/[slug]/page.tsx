@@ -39,7 +39,7 @@ function StoryBlock({
   return (
     <Reveal>
       <div className="grid gap-6 md:grid-cols-[180px_1fr]">
-        <p className="font-display text-sm font-bold uppercase tracking-[0.18em] text-gold">
+        <p className="font-display text-sm font-bold uppercase tracking-[0.18em] text-gold-deep">
           {step} · {title}
         </p>
         <div className="space-y-5">
@@ -72,11 +72,11 @@ export default async function CaseStudyPage({
       >
         <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted">
           <span className="flex items-center gap-2">
-            <MapPin className="size-4 text-gold" aria-hidden />
+            <MapPin className="size-4 text-gold-deep" aria-hidden />
             {study.location}
           </span>
           <span className="flex items-center gap-2">
-            <Timer className="size-4 text-gold" aria-hidden />
+            <Timer className="size-4 text-gold-deep" aria-hidden />
             {study.timeline}
           </span>
         </div>
@@ -92,7 +92,7 @@ export default async function CaseStudyPage({
                   key={r.label}
                   className="rounded-3xl border border-border bg-card p-7 text-center shadow-soft"
                 >
-                  <p className="font-display text-2xl font-bold text-gold md:text-3xl">
+                  <p className="font-display text-2xl font-bold text-gold-deep md:text-3xl">
                     {r.value}
                   </p>
                   <p className="mt-2 text-sm text-muted">{r.label}</p>

@@ -1,17 +1,40 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
-import type { ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
-const variants: Variants = {
-  hidden: { opacity: 0, y: 28 },
-  visible: (delay: number = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, delay, ease: [0.21, 0.47, 0.32, 0.98] },
-  }),
-};
+// Lightweight scroll reveals: one shared IntersectionObserver toggles a CSS
+// class; all animation runs in CSS (see globals.css). Replaces framer-motion
+// here, which removed it from the bundle of every mostly-static section.
+// Hidden states are gated on html.js, so content is never invisible without JS.
+
+let observer: IntersectionObserver | null = null;
+
+function observe(el: Element) {
+  observer ??= new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in");
+          observer?.unobserve(entry.target);
+        }
+      }
+    },
+    { rootMargin: "-60px 0px" },
+  );
+  observer.observe(el);
+}
+
+function useReveal<T extends HTMLElement>() {
+  const ref = useRef<T>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    observe(el);
+    return () => observer?.unobserve(el);
+  }, []);
+  return ref;
+}
 
 export function Reveal({
   children,
@@ -22,40 +45,32 @@ export function Reveal({
   delay?: number;
   className?: string;
 }) {
+  const ref = useReveal<HTMLDivElement>();
   return (
-    <motion.div
-      className={className}
-      variants={variants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-80px" }}
-      custom={delay}
+    <div
+      ref={ref}
+      className={cn("reveal", className)}
+      style={delay ? ({ "--reveal-delay": `${delay}s` } as React.CSSProperties) : undefined}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }
 
 export function Stagger({
   children,
   className,
-  gap = 0.08,
 }: {
   children: ReactNode;
   className?: string;
+  /** Kept for API compatibility; stagger timing now lives in CSS. */
   gap?: number;
 }) {
+  const ref = useReveal<HTMLDivElement>();
   return (
-    <motion.div
-      className={className}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ staggerChildren: gap }}
-      variants={{ hidden: {}, visible: { transition: { staggerChildren: gap } } }}
-    >
+    <div ref={ref} className={cn("stagger", className)}>
       {children}
-    </motion.div>
+    </div>
   );
 }
 
@@ -66,19 +81,5 @@ export function StaggerItem({
   children: ReactNode;
   className?: string;
 }) {
-  return (
-    <motion.div
-      className={cn(className)}
-      variants={{
-        hidden: { opacity: 0, y: 24 },
-        visible: {
-          opacity: 1,
-          y: 0,
-          transition: { duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98] },
-        },
-      }}
-    >
-      {children}
-    </motion.div>
-  );
+  return <div className={cn("stagger-item", className)}>{children}</div>;
 }

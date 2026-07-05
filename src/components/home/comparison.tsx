@@ -1,5 +1,3 @@
-"use client";
-
 import { Check, X } from "lucide-react";
 import { comparison } from "@/lib/site";
 import { Container, Eyebrow, Heading, Lead, Section } from "@/components/ui/section";

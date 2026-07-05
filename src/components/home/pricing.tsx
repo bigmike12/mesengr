@@ -1,6 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { Check } from "lucide-react";
 import { engagementModels } from "@/lib/site";
 import { Container, Eyebrow, Heading, Lead, Section } from "@/components/ui/section";
@@ -26,9 +23,8 @@ export function Pricing({ compact = false }: { compact?: boolean }) {
         <Stagger className="mt-14 grid gap-5 lg:grid-cols-3" gap={0.08}>
           {engagementModels.map((model) => (
             <StaggerItem key={model.name}>
-              <motion.div
-                whileHover={{ y: -6 }}
-                className={`relative flex h-full flex-col rounded-3xl border p-8 transition-shadow duration-300 ${
+              <div
+                className={`hover-lift relative flex h-full flex-col rounded-3xl border p-8 ${
                   model.highlight
                     ? "border-gold/50 bg-ink text-white shadow-lift dark:bg-card"
                     : "border-border bg-card shadow-soft hover:shadow-lift"
@@ -40,7 +36,7 @@ export function Pricing({ compact = false }: { compact?: boolean }) {
                   </span>
                 )}
                 <h3 className="font-display text-2xl font-semibold">{model.name}</h3>
-                <p className={`mt-1 text-sm ${model.highlight ? "text-gold" : "text-gold"}`}>
+                <p className={`mt-1 text-sm ${model.highlight ? "text-gold" : "text-gold-deep"}`}>
                   {model.audience}
                 </p>
                 <p
@@ -74,7 +70,7 @@ export function Pricing({ compact = false }: { compact?: boolean }) {
                     Start with {model.name}
                   </ButtonLink>
                 </div>
-              </motion.div>
+              </div>
             </StaggerItem>
           ))}
         </Stagger>
@@ -83,7 +79,7 @@ export function Pricing({ compact = false }: { compact?: boolean }) {
           <Reveal delay={0.15} className="mt-10 text-center">
             <p className="text-sm text-muted">
               Not sure which fits?{" "}
-              <a href="/assessment" className="font-medium text-gold underline-offset-4 hover:underline">
+              <a href="/assessment" className="font-medium text-gold-deep underline-offset-4 hover:underline">
                 Take the 5-minute Digital Assessment
               </a>{" "}
               and we&apos;ll tell you.

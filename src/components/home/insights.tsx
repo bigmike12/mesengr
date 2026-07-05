@@ -1,7 +1,4 @@
-"use client";
-
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { ArrowUpRight, Clock } from "lucide-react";
 import { blogPosts } from "@/lib/site";
 import { Container, Eyebrow, Heading, Lead, Section } from "@/components/ui/section";
@@ -31,13 +28,13 @@ export function Insights({ limit = 3 }: { limit?: number }) {
         <Stagger className="mt-12 grid gap-5 md:grid-cols-3" gap={0.07}>
           {blogPosts.slice(0, limit).map((post) => (
             <StaggerItem key={post.slug}>
-              <motion.article whileHover={{ y: -5 }} className="h-full">
+              <article className="hover-lift h-full">
                 <Link
                   href={`/blog/${post.slug}`}
                   className="group flex h-full flex-col rounded-3xl border border-border bg-card p-7 shadow-soft transition-all hover:border-gold/40 hover:shadow-lift"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="rounded-full bg-gold-soft px-3 py-1 text-[11px] font-semibold text-gold">
+                    <span className="rounded-full bg-gold-soft px-3 py-1 text-[11px] font-semibold text-gold-deep">
                       {post.category}
                     </span>
                     <ArrowUpRight
@@ -59,7 +56,7 @@ export function Insights({ limit = 3 }: { limit?: number }) {
                     })}
                   </p>
                 </Link>
-              </motion.article>
+              </article>
             </StaggerItem>
           ))}
         </Stagger>

@@ -1,9 +1,8 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { Container, Eyebrow } from "@/components/ui/section";
 import type { ReactNode } from "react";
 
+// Server component — the H1 here is the LCP element on interior pages, so it
+// enters via pure CSS animation (transform-only) and paints with the first byte.
 export function PageHeader({
   eyebrow,
   title,
@@ -26,20 +25,18 @@ export function PageHeader({
         className="absolute left-1/2 top-0 -z-10 h-72 w-[640px] -translate-x-1/2 rounded-full bg-gold/10 blur-[120px]"
       />
       <Container className="relative">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: [0.21, 0.47, 0.32, 0.98] }}
-        >
+        <div className="anim-fade-up">
           <Eyebrow>{eyebrow}</Eyebrow>
-          <h1 className="max-w-3xl font-display text-5xl font-semibold leading-[1.05] tracking-tight text-balance md:text-6xl">
-            {title}
-          </h1>
-          {lead && (
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">{lead}</p>
-          )}
-          {children}
-        </motion.div>
+        </div>
+        <h1 className="anim-rise max-w-3xl font-display text-5xl font-semibold leading-[1.05] tracking-tight text-balance [animation-delay:0.06s] md:text-6xl">
+          {title}
+        </h1>
+        {lead && (
+          <p className="anim-fade-up mt-6 max-w-2xl text-lg leading-relaxed text-muted [animation-delay:0.15s]">
+            {lead}
+          </p>
+        )}
+        {children}
       </Container>
     </div>
   );

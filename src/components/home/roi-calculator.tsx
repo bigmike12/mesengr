@@ -45,7 +45,7 @@ function SliderRow({
     <div>
       <div className="mb-2 flex items-center justify-between">
         <Label className="mb-0">{label}</Label>
-        <span className="rounded-full bg-gold-soft px-3 py-1 font-display text-sm font-semibold text-gold">
+        <span className="rounded-full bg-gold-soft px-3 py-1 font-display text-sm font-semibold text-gold-deep">
           {format(value)}
         </span>
       </div>

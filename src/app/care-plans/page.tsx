@@ -55,7 +55,11 @@ export default function CarePlansPage() {
                         <ShieldCheck className="size-6 text-gold" aria-hidden />
                       </span>
                       <div>
-                        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-gold">
+                        <p
+                          className={`text-xs font-semibold uppercase tracking-[0.18em] ${
+                            plan.highlight ? "text-gold" : "text-gold-deep"
+                          }`}
+                        >
                           Plan {i + 1} of {carePlans.length}
                         </p>
                         <h2 className="font-display text-3xl font-semibold">
@@ -77,7 +81,7 @@ export default function CarePlansPage() {
                     </p>
                     <p
                       className={`mt-4 flex items-start gap-2 text-sm font-medium ${
-                        plan.highlight ? "text-gold" : "text-gold"
+                        plan.highlight ? "text-gold" : "text-gold-deep"
                       }`}
                     >
                       <Sparkles className="mt-0.5 size-4 shrink-0" aria-hidden />
@@ -94,7 +98,7 @@ export default function CarePlansPage() {
                       {plan.detail.includes.map((item) => (
                         <div key={item.title} className="flex gap-4">
                           <span className="mt-1 flex size-6 shrink-0 items-center justify-center rounded-full bg-gold-soft">
-                            <Check className="size-3.5 text-gold" aria-hidden />
+                            <Check className="size-3.5 text-gold-deep" aria-hidden />
                           </span>
                           <div>
                             <p className="font-display font-semibold">{item.title}</p>
@@ -109,7 +113,7 @@ export default function CarePlansPage() {
                     <div className="mt-10 flex flex-col gap-6 border-t border-border pt-8 lg:flex-row lg:items-center lg:justify-between">
                       <div className="space-y-3">
                         <p className="flex items-center gap-2 text-sm text-muted">
-                          <Clock className="size-4 text-gold" aria-hidden />
+                          <Clock className="size-4 text-gold-deep" aria-hidden />
                           {plan.detail.response}
                         </p>
                         <div className="flex flex-wrap gap-2">

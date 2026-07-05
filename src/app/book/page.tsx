@@ -39,7 +39,7 @@ export default function BookPage() {
                   {expectations.map((e) => (
                     <li key={e} className="flex items-start gap-3 text-sm leading-relaxed">
                       <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-gold-soft">
-                        <Check className="size-3 text-gold" aria-hidden />
+                        <Check className="size-3 text-gold-deep" aria-hidden />
                       </span>
                       {e}
                     </li>

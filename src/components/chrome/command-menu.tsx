@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { ArrowRight, FileText, Search, Sparkles, Wrench } from "lucide-react";
 import { allPages, services, blogPosts } from "@/lib/site";
 
@@ -79,7 +79,7 @@ export function CommandMenu({
   return (
     <AnimatePresence>
       {open && (
-        <motion.div
+        <m.div
           className="fixed inset-0 z-[100] flex items-start justify-center px-4 pt-[14vh]"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -93,7 +93,7 @@ export function CommandMenu({
             onClick={onClose}
             aria-hidden
           />
-          <motion.div
+          <m.div
             initial={{ opacity: 0, scale: 0.97, y: -10 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.97, y: -10 }}
@@ -153,8 +153,8 @@ export function CommandMenu({
                 </button>
               ))}
             </div>
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
       )}
     </AnimatePresence>
   );

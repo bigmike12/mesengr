@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { motion } from "framer-motion";
 import { Check, ChevronLeft, ChevronRight, Video } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input, Label } from "@/components/ui/field";
@@ -66,10 +65,8 @@ export function Booking() {
   if (confirmed && dayIdx !== null && slot) {
     const day = days[dayIdx];
     return (
-      <motion.div
-        initial={{ opacity: 0, scale: 0.96 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className="flex flex-col items-center gap-4 rounded-3xl border border-gold/40 bg-gold-soft p-12 text-center"
+      <div
+        className="anim-fade-up flex flex-col items-center gap-4 rounded-3xl border border-gold/40 bg-gold-soft p-12 text-center"
       >
         <span className="flex size-14 items-center justify-center rounded-full bg-gold text-ink">
           <Check className="size-6" aria-hidden />
@@ -85,10 +82,10 @@ export function Booking() {
           <span className="font-medium text-foreground">{email}</span>.
         </p>
         <p className="flex items-center gap-2 text-sm text-muted">
-          <Video className="size-4 text-gold" aria-hidden />
+          <Video className="size-4 text-gold-deep" aria-hidden />
           30 minutes · Google Meet · genuinely free
         </p>
-      </motion.div>
+      </div>
     );
   }
 
@@ -133,7 +130,7 @@ export function Booking() {
               <span className="block text-[11px] uppercase text-muted">
                 {day.toLocaleDateString("en-US", { weekday: "short" })}
               </span>
-              <span className={`block font-display text-lg font-semibold ${selected ? "text-gold" : ""}`}>
+              <span className={`block font-display text-lg font-semibold ${selected ? "text-gold-deep" : ""}`}>
                 {day.getDate()}
               </span>
               <span className="block text-[11px] text-muted">
@@ -145,9 +142,10 @@ export function Booking() {
       </div>
 
       {/* Step 2: time */}
-      <motion.div
-        animate={{ opacity: dayIdx !== null ? 1 : 0.35 }}
-        className="mt-8"
+      <div
+        className={`mt-8 transition-opacity duration-300 ${
+          dayIdx !== null ? "opacity-100" : "opacity-35"
+        }`}
       >
         <p className="mb-3 text-sm font-semibold">2 · Pick a time</p>
         <div className="grid grid-cols-3 gap-2 sm:grid-cols-6">
@@ -158,7 +156,7 @@ export function Booking() {
               onClick={() => setSlot(s)}
               className={`rounded-2xl border py-2.5 text-sm transition-all disabled:cursor-not-allowed ${
                 slot === s
-                  ? "border-gold bg-gold-soft font-semibold text-gold"
+                  ? "border-gold bg-gold-soft font-semibold text-gold-deep"
                   : "border-border hover:border-border-strong"
               }`}
             >
@@ -166,12 +164,13 @@ export function Booking() {
             </button>
           ))}
         </div>
-      </motion.div>
+      </div>
 
       {/* Step 3: details */}
-      <motion.form
-        animate={{ opacity: slot !== null ? 1 : 0.35 }}
-        className="mt-8"
+      <form
+        className={`mt-8 transition-opacity duration-300 ${
+          slot !== null ? "opacity-100" : "opacity-35"
+        }`}
         onSubmit={(e) => {
           e.preventDefault();
           confirm();
@@ -220,7 +219,7 @@ export function Booking() {
         <p className="mt-3 text-center text-xs text-muted">
           30 minutes · video call · no obligation, no pressure
         </p>
-      </motion.form>
+      </form>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { Activity, ArrowRight, Globe, Loader2, RefreshCw } from "lucide-react";
 import { ButtonLink } from "@/components/ui/button";
 
@@ -31,7 +31,7 @@ function ScoreRing({ score, label, delay }: { score: number; label: string; dela
             stroke="var(--border)"
             strokeWidth="7"
           />
-          <motion.circle
+          <m.circle
             cx="56"
             cy="56"
             r={radius}
@@ -148,7 +148,7 @@ export function HealthCheck() {
 
       <AnimatePresence mode="wait">
         {running && (
-          <motion.p
+          <m.p
             key={phase}
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
@@ -157,11 +157,11 @@ export function HealthCheck() {
             aria-live="polite"
           >
             {phases[phase]}
-          </motion.p>
+          </m.p>
         )}
 
         {error && !running && (
-          <motion.div
+          <m.div
             key="error"
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
@@ -176,11 +176,11 @@ export function HealthCheck() {
               <RefreshCw className="size-4" aria-hidden />
               Try again
             </button>
-          </motion.div>
+          </m.div>
         )}
 
         {report && (
-          <motion.div
+          <m.div
             key="report"
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
@@ -211,7 +211,7 @@ export function HealthCheck() {
                 <ul className="space-y-3">
                   {report.suggestions.map((s) => (
                     <li key={s} className="flex items-start gap-3 text-sm leading-relaxed">
-                      <ArrowRight className="mt-0.5 size-4 shrink-0 text-gold" aria-hidden />
+                      <ArrowRight className="mt-0.5 size-4 shrink-0 text-gold-deep" aria-hidden />
                       {s}
                     </li>
                   ))}
@@ -229,7 +229,7 @@ export function HealthCheck() {
                 Book a free consultation
               </ButtonLink>
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </div>

@@ -54,7 +54,7 @@ export default function CareersPage() {
             <Heading>We hire slowly and deliberately.</Heading>
             <Lead>
               Nothing that fits? Write to us anyway —{" "}
-              <a href={`mailto:${site.email}`} className="text-gold underline-offset-4 hover:underline">
+              <a href={`mailto:${site.email}`} className="text-gold-deep underline-offset-4 hover:underline">
                 {site.email}
               </a>
               . Exceptional people change our plans.

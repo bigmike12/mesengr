@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { motion } from "framer-motion";
 import { Check, Loader2, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FieldError, Input, Label, Select, Textarea } from "@/components/ui/field";
@@ -50,10 +49,8 @@ export function ContactForm() {
 
   if (sent) {
     return (
-      <motion.div
-        initial={{ opacity: 0, scale: 0.96 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className="flex flex-col items-center gap-4 rounded-3xl border border-gold/40 bg-gold-soft p-12 text-center"
+      <div
+        className="anim-fade-up flex flex-col items-center gap-4 rounded-3xl border border-gold/40 bg-gold-soft p-12 text-center"
       >
         <span className="flex size-14 items-center justify-center rounded-full bg-gold text-ink">
           <Check className="size-6" aria-hidden />
@@ -63,7 +60,7 @@ export function ContactForm() {
           A real person will reply within one business day — usually much
           faster.
         </p>
-      </motion.div>
+      </div>
     );
   }
 

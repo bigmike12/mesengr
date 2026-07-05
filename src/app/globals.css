@@ -13,6 +13,10 @@
   --ink: #0b0f19;
   --ink-2: #111827;
   --gold: #d4af37;
+  /* Deep gold: AA-contrast (≥4.5:1) variant for text on light surfaces */
+  --gold-deep: #8a6d1f;
+  --gold-grad-a: #8a6d1f;
+  --gold-grad-b: #a98122;
   --gold-soft: rgba(212, 175, 55, 0.12);
   --glass: rgba(255, 255, 255, 0.7);
   --shadow-soft: 0 1px 2px rgba(11, 15, 25, 0.04), 0 8px 24px rgba(11, 15, 25, 0.06);
@@ -24,6 +28,9 @@
   --foreground: #e6e9f0;
   --surface: #0e1322;
   --card: #111827;
+  --gold-deep: #d4af37;
+  --gold-grad-a: #d4af37;
+  --gold-grad-b: #f0d47a;
   --muted: #8b94a7;
   --border: rgba(230, 233, 240, 0.08);
   --border-strong: rgba(230, 233, 240, 0.16);
@@ -43,13 +50,13 @@
   --color-ink: var(--ink);
   --color-ink-2: var(--ink-2);
   --color-gold: var(--gold);
+  --color-gold-deep: var(--gold-deep);
   --color-gold-soft: var(--gold-soft);
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-space-grotesk), var(--font-inter), ui-sans-serif, sans-serif;
   --shadow-soft: var(--shadow-soft);
   --shadow-lift: var(--shadow-lift);
   --animate-marquee: marquee 36s linear infinite;
-  --animate-shimmer: shimmer 2.4s linear infinite;
   --animate-float: float 7s ease-in-out infinite;
 }
 
@@ -58,14 +65,88 @@
   to { transform: translateX(-50%); }
 }
 
-@keyframes shimmer {
-  from { background-position: 200% 0; }
-  to { background-position: -200% 0; }
-}
-
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-12px); }
+}
+
+/* --- Entrance animations (pure CSS: paint immediately, no hydration gate) --- */
+
+/* Transform-only: safe for the LCP element — first paint is fully opaque */
+@keyframes rise {
+  from { transform: translateY(26px); }
+  to { transform: translateY(0); }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(26px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.anim-rise {
+  animation: rise 0.7s cubic-bezier(0.21, 0.47, 0.32, 0.98) both;
+}
+
+.anim-fade-up {
+  animation: fade-up 0.7s cubic-bezier(0.21, 0.47, 0.32, 0.98) both;
+}
+
+/* --- Scroll reveals (IntersectionObserver adds .in; see ui/reveal.tsx) ---
+   Hidden state only applies once JS is confirmed (html.js), so content is
+   always visible for no-JS visitors and crawlers. */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+.js .reveal.in {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.7s cubic-bezier(0.21, 0.47, 0.32, 0.98) var(--reveal-delay, 0s),
+    transform 0.7s cubic-bezier(0.21, 0.47, 0.32, 0.98) var(--reveal-delay, 0s);
+}
+
+.js .stagger > .stagger-item {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+.js .stagger.in > .stagger-item {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.6s cubic-bezier(0.21, 0.47, 0.32, 0.98),
+    transform 0.6s cubic-bezier(0.21, 0.47, 0.32, 0.98);
+}
+
+/* Staggered delays without per-item JS */
+.js .stagger.in > .stagger-item:nth-child(1) { transition-delay: 0s; }
+.js .stagger.in > .stagger-item:nth-child(2) { transition-delay: 0.06s; }
+.js .stagger.in > .stagger-item:nth-child(3) { transition-delay: 0.12s; }
+.js .stagger.in > .stagger-item:nth-child(4) { transition-delay: 0.18s; }
+.js .stagger.in > .stagger-item:nth-child(5) { transition-delay: 0.24s; }
+.js .stagger.in > .stagger-item:nth-child(6) { transition-delay: 0.3s; }
+.js .stagger.in > .stagger-item:nth-child(7) { transition-delay: 0.36s; }
+.js .stagger.in > .stagger-item:nth-child(8) { transition-delay: 0.42s; }
+.js .stagger.in > .stagger-item:nth-child(9) { transition-delay: 0.48s; }
+.js .stagger.in > .stagger-item:nth-child(10) { transition-delay: 0.54s; }
+.js .stagger.in > .stagger-item:nth-child(11) { transition-delay: 0.6s; }
+.js .stagger.in > .stagger-item:nth-child(12) { transition-delay: 0.66s; }
+.js .stagger.in > .stagger-item:nth-child(n + 13) { transition-delay: 0.72s; }
+
+/* GPU-friendly hover lift for cards (replaces per-card JS animation) */
+.hover-lift {
+  transition:
+    transform 0.3s cubic-bezier(0.21, 0.47, 0.32, 0.98),
+    box-shadow 0.3s cubic-bezier(0.21, 0.47, 0.32, 0.98),
+    border-color 0.3s ease;
+}
+
+@media (hover: hover) {
+  .hover-lift:hover {
+    transform: translateY(-5px);
+  }
 }
 
 html {
@@ -104,20 +185,20 @@ body {
   -webkit-backdrop-filter: blur(16px) saturate(1.4);
 }
 
+/* Gradient text: deep golds in light mode (≥3:1 for large text), bright in dark */
 .text-gradient-gold {
-  background: linear-gradient(100deg, var(--gold) 0%, #f0d47a 45%, var(--gold) 100%);
+  background: linear-gradient(100deg, var(--gold-grad-a) 0%, var(--gold-grad-b) 45%, var(--gold-grad-a) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
-.shimmer-text {
-  background: linear-gradient(100deg, var(--foreground) 40%, var(--gold) 50%, var(--foreground) 60%);
-  background-size: 200% 100%;
+/* On permanently-dark surfaces, force the bright variant in both themes */
+.text-gradient-gold-bright {
+  background: linear-gradient(100deg, #d4af37 0%, #f0d47a 45%, #d4af37 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  animation: shimmer 4s linear infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {

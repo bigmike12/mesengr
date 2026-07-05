@@ -64,14 +64,14 @@ export default function ContactPage() {
                     target={c.href.startsWith("http") ? "_blank" : undefined}
                     className="group flex items-center gap-5 rounded-3xl border border-border bg-card p-6 shadow-soft transition-all hover:border-gold/40 hover:shadow-lift"
                   >
-                    <span className="rounded-2xl bg-gold-soft p-3.5 text-gold transition-transform group-hover:scale-110">
+                    <span className="rounded-2xl bg-gold-soft p-3.5 text-gold-deep transition-transform group-hover:scale-110">
                       <c.icon className="size-5" aria-hidden />
                     </span>
                     <span>
                       <span className="block font-display font-semibold">{c.title}</span>
                       <span className="mt-0.5 block text-sm text-muted">{c.text}</span>
                     </span>
-                    <span className="ml-auto text-xs font-medium text-gold opacity-0 transition-opacity group-hover:opacity-100">
+                    <span className="ml-auto text-xs font-medium text-gold-deep opacity-0 transition-opacity group-hover:opacity-100">
                       {c.label} →
                     </span>
                   </Link>

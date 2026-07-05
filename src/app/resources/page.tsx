@@ -77,7 +77,7 @@ export default function ResourcesPage() {
                   className="group flex h-full flex-col rounded-3xl border border-border bg-card p-7 shadow-soft transition-all hover:border-gold/40 hover:shadow-lift"
                 >
                   <div className="flex items-start justify-between">
-                    <span className="rounded-2xl bg-gold-soft p-3 text-gold transition-transform group-hover:scale-110">
+                    <span className="rounded-2xl bg-gold-soft p-3 text-gold-deep transition-transform group-hover:scale-110">
                       <r.icon className="size-5" aria-hidden />
                     </span>
                     <span className="rounded-full border border-border px-3 py-1 text-[11px] text-muted">
@@ -86,7 +86,7 @@ export default function ResourcesPage() {
                   </div>
                   <h2 className="mt-5 font-display text-lg font-semibold">{r.title}</h2>
                   <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">{r.text}</p>
-                  <span className="mt-5 flex items-center gap-1.5 text-sm font-medium text-gold">
+                  <span className="mt-5 flex items-center gap-1.5 text-sm font-medium text-gold-deep">
                     Open
                     <ArrowUpRight
                       className="size-4 transition-transform group-hover:translate-x-0.5"
